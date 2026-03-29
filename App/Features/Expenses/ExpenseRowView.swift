@@ -35,6 +35,15 @@ struct ExpenseRowView: View {
 }
 
 #Preview {
-    ExpenseRowView(expense: Expense.samples[0])
-        .padding()
+    ExpenseRowView(
+        expense: Expense(
+            merchantName: L10n.Sample.expenseOneMerchant,
+            amount: 168,
+            category: .dining,
+            location: L10n.Sample.expenseOneLocation,
+            date: .now,
+            receiptDetected: true
+        )
+    )
+    .padding()
 }

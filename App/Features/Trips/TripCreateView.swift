@@ -83,7 +83,7 @@ struct TripCreateView: View {
     }
 
     private func makeTrip() -> Trip {
-        let parsedBudget = Decimal(string: budget) ?? 0
+        let parsedBudget = Double(budget) ?? 0
         let highlightItems = highlights
             .split(separator: ",")
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -109,4 +109,5 @@ struct TripCreateView: View {
     NavigationStack {
         TripCreateView { _ in }
     }
+    .modelContainer(for: [Trip.self, ItineraryDay.self, Place.self, RoutePlan.self, Expense.self], inMemory: true)
 }

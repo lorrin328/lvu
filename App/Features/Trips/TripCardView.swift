@@ -40,6 +40,6 @@ struct TripCardView: View {
 }
 
 #Preview {
-    TripCardView(trip: Trip.samples[0])
+    TripCardView(trip: SampleDataSeeder.sampleTrips()[0])
         .padding()
 }

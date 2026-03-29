@@ -1,7 +1,9 @@
 import SwiftUI
+import SwiftData
 
 struct TripListView: View {
-    @State private var trips = Trip.samples
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \Trip.startDate) private var trips: [Trip]
     @State private var showingCreateSheet = false
 
     var body: some View {
@@ -37,7 +39,7 @@ struct TripListView: View {
         .sheet(isPresented: $showingCreateSheet) {
             NavigationStack {
                 TripCreateView { trip in
-                    trips.insert(trip, at: 0)
+                    modelContext.insert(trip)
                 }
             }
         }
@@ -48,4 +50,5 @@ struct TripListView: View {
     NavigationStack {
         TripListView()
     }
+    .modelContainer(for: [Trip.self, ItineraryDay.self, Place.self, RoutePlan.self, Expense.self], inMemory: true)
 }

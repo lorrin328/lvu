@@ -34,6 +34,12 @@ fastlane/test_output/
 
 # macOS
 .DS_Store
+Desktop.ini
+
+# Sync artifacts
+.nextcloudsync.log
+.sync_*.db
+.sync_*.db-wal
 
 # Editors
 .idea/

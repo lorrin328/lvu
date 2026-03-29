@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct LVUApp: App {
@@ -6,5 +7,12 @@ struct LVUApp: App {
         WindowGroup {
             RootTabView()
         }
+        .modelContainer(for: [
+            Trip.self,
+            ItineraryDay.self,
+            Place.self,
+            RoutePlan.self,
+            Expense.self
+        ])
     }
 }

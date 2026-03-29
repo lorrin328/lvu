@@ -1,7 +1,11 @@
 import SwiftUI
+import SwiftData
 
 struct TripDetailView: View {
-    let trip: Trip
+    @Bindable var trip: Trip
+    @State private var showingDaySheet = false
+    @State private var showingPlaceSheet = false
+    @State private var showingRouteSheet = false
 
     var body: some View {
         List {
@@ -14,7 +18,7 @@ struct TripDetailView: View {
             }
 
             Section(L10n.Trips.itinerary) {
-                ForEach(trip.itineraryDays) { day in
+                ForEach(trip.itineraryDays.sorted { $0.dayNumber < $1.dayNumber }) { day in
                     VStack(alignment: .leading, spacing: 4) {
                         Text("\(L10n.Trips.dayTitle) \(day.dayNumber)")
                             .font(.headline)
@@ -61,11 +65,50 @@ struct TripDetailView: View {
             }
         }
         .navigationTitle(trip.title)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Button(L10n.Trips.addDay) {
+                        showingDaySheet = true
+                    }
+                    Button(L10n.Trips.addPlace) {
+                        showingPlaceSheet = true
+                    }
+                    Button(L10n.Trips.addRoute) {
+                        showingRouteSheet = true
+                    }
+                } label: {
+                    Image(systemName: "plus.circle")
+                }
+            }
+        }
+        .sheet(isPresented: $showingDaySheet) {
+            NavigationStack {
+                ItineraryDayCreateView { day in
+                    trip.itineraryDays.append(day)
+                }
+            }
+        }
+        .sheet(isPresented: $showingPlaceSheet) {
+            NavigationStack {
+                PlaceCreateView { place in
+                    trip.places.append(place)
+                }
+            }
+        }
+        .sheet(isPresented: $showingRouteSheet) {
+            NavigationStack {
+                RouteCreateView { route in
+                    trip.routes.append(route)
+                }
+            }
+        }
     }
 }
 
 #Preview {
     NavigationStack {
-        TripDetailView(trip: Trip.samples[0])
+        TripDetailView(trip: SampleDataSeeder.sampleTrips()[0])
     }
+    .modelContainer(for: [Trip.self, ItineraryDay.self, Place.self, RoutePlan.self, Expense.self], inMemory: true)
 }

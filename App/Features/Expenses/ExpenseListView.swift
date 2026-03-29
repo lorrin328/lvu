@@ -1,7 +1,10 @@
 import SwiftUI
+import SwiftData
 
 struct ExpenseListView: View {
-    private let expenses = Expense.samples
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \Expense.date, order: .reverse) private var expenses: [Expense]
+    @State private var showingCreateSheet = false
 
     var body: some View {
         List {
@@ -27,6 +30,14 @@ struct ExpenseListView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(L10n.Expenses.capture) {
+                    showingCreateSheet = true
+                }
+            }
+        }
+        .sheet(isPresented: $showingCreateSheet) {
+            NavigationStack {
+                ExpenseCreateView { expense in
+                    modelContext.insert(expense)
                 }
             }
         }
@@ -37,4 +48,5 @@ struct ExpenseListView: View {
     NavigationStack {
         ExpenseListView()
     }
+    .modelContainer(for: [Trip.self, ItineraryDay.self, Place.self, RoutePlan.self, Expense.self], inMemory: true)
 }

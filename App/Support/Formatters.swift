@@ -23,6 +23,6 @@ enum LVUFormatters {
     }()
 }
 
-func localizedCurrency(_ amount: Decimal) -> String {
-    LVUFormatters.currency.string(from: amount as NSDecimalNumber) ?? "\(amount)"
+func localizedCurrency(_ amount: Double) -> String {
+    LVUFormatters.currency.string(from: NSNumber(value: amount)) ?? "\(amount)"
 }

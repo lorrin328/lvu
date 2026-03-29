@@ -2,39 +2,48 @@
 
 ## 核心结论
 
-1. 当前仓库已加入一个可生成的 SwiftUI iOS 工程骨架。
-2. 工程从第一版起即按中英双语结构组织。
-3. 当前环境无法在本机编译，需在 macOS + Xcode 环境下生成并运行。
+1. 当前仓库已经包含基于 `SwiftData` 的 SwiftUI 应用骨架。
+2. 项目继续按中英双语结构维护，满足首版国际化要求。
+3. 现在已经支持在 App 内新建旅行，并在详情页新增行程日和地点。
 
 ## 当前结构
 
 - `project.yml`：XcodeGen 工程定义
 - `App/`：SwiftUI 源码
+- `App/Models/`：SwiftData 模型
 - `Resources/en.lproj/Localizable.strings`：英文文案
 - `Resources/zh-Hans.lproj/Localizable.strings`：中文文案
 - `Resources/Assets.xcassets/`：资源目录
 
-## 已落地页面骨架
+## 已落地页面
 
 - 旅行列表
+- 新建旅行
 - 行程详情
+- 新增行程日
+- 新增地点
+- 新增路线
 - 消费记录
+- 新增消费
 - 设置
 
 ## 已落地模型
 
 - `Trip`
+- `ItineraryDay`
+- `Place`
+- `RoutePlan`
 - `Expense`
 
 ## 已落地能力
 
 - `TabView` 主导航
-- 双语本地化资源
-- 旅行卡片示例数据
-- 消费记录示例数据
+- `SwiftData` 模型容器
+- 首次启动自动播种样例数据
+- 中英双语本地化资源
 - 金额与日期格式化
 
-## 在 Mac 上怎么生成工程
+## 在 Mac 上如何生成工程
 
 ### Step 1
 
@@ -60,9 +69,14 @@ xcodegen generate
 
 选择模拟器并运行
 
+## 当前限制
+
+- 当前 Windows 环境无法编译或运行 iOS App
+- 实际运行验证仍需要 macOS + Xcode
+
 ## 下一步建议
 
-1. 接入 SwiftData，替换示例数据
-2. 建立 Trip 创建页和编辑页
-3. 建立 ItineraryDay 和 Place 模型
-4. 建立截图 OCR 流程占位页
+1. 增加路线编辑
+2. 增加消费与旅行的关联
+3. 增加截图 OCR 占位流程
+4. 把路线说明从自由文本逐步改为结构化字段

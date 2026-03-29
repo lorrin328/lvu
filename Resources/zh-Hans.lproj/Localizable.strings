@@ -43,15 +43,33 @@
 "trips.day_title" = "第";
 "trips.from_to" = "路线";
 "trips.no_data" = "未填写";
+"trips.add_day" = "新增行程日";
+"trips.add_place" = "新增地点";
+"trips.day_summary_field" = "当天安排摘要";
+"trips.day_notes_field" = "当天备注";
+"trips.place_name_field" = "地点名称";
+"trips.place_address_field" = "地点地址";
+"trips.place_type_field" = "地点类型";
+"trips.place_notes_field" = "地点备注";
+"trips.kid_friendly_toggle" = "是否亲子友好";
+"trips.add_route" = "新增路线";
+"trips.route_from_field" = "起点";
+"trips.route_to_field" = "终点";
+"trips.route_distance_field" = "距离";
+"trips.route_duration_field" = "时长";
+"trips.route_support_field" = "途中说明";
 
 "expenses.title" = "消费记录";
 "expenses.capture" = "添加凭证";
+"expenses.create_title" = "新增消费";
 "expenses.empty_title" = "还没有消费记录";
 "expenses.empty_subtitle" = "上传截图或手动新增一笔消费。";
 "expenses.merchant" = "商户";
 "expenses.amount" = "金额";
 "expenses.category" = "类别";
 "expenses.location" = "地点";
+"expenses.date" = "时间";
+"expenses.receipt_detected" = "是否来自截图识别";
 "expenses.receipt_hint" = "第一版保留截图 OCR 识别后的人工确认步骤。";
 
 "expense.category.dining" = "餐饮";

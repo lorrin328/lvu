@@ -34,6 +34,16 @@ An iOS app project for travel planning and itinerary management.
 - [MVP PRD](docs/product/prd-mvp.md)
 - [Information Architecture and MVP Priority](docs/product/information-architecture.md)
 
+## Project Status / 项目状态
+
+### 中文
+
+- [项目进展状态](docs/project/status.zh-CN.md)
+
+### English
+
+- [Project Status](docs/project/status.md)
+
 ## iOS Skeleton / iOS 骨架
 
 ### 中文

@@ -43,15 +43,33 @@
 "trips.day_title" = "Day";
 "trips.from_to" = "Route";
 "trips.no_data" = "Not set";
+"trips.add_day" = "Add Day";
+"trips.add_place" = "Add Place";
+"trips.day_summary_field" = "Day summary";
+"trips.day_notes_field" = "Day notes";
+"trips.place_name_field" = "Place name";
+"trips.place_address_field" = "Place address";
+"trips.place_type_field" = "Place type";
+"trips.place_notes_field" = "Place notes";
+"trips.kid_friendly_toggle" = "Kid-friendly";
+"trips.add_route" = "Add Route";
+"trips.route_from_field" = "From";
+"trips.route_to_field" = "To";
+"trips.route_distance_field" = "Distance";
+"trips.route_duration_field" = "Duration";
+"trips.route_support_field" = "Support notes";
 
 "expenses.title" = "Expense Records";
 "expenses.capture" = "Add Receipt";
+"expenses.create_title" = "Add Expense";
 "expenses.empty_title" = "No expenses yet";
 "expenses.empty_subtitle" = "Capture a receipt or add a manual expense.";
 "expenses.merchant" = "Merchant";
 "expenses.amount" = "Amount";
 "expenses.category" = "Category";
 "expenses.location" = "Location";
+"expenses.date" = "Date";
+"expenses.receipt_detected" = "Detected from receipt";
 "expenses.receipt_hint" = "Version 1 keeps receipt OCR with manual confirmation.";
 
 "expense.category.dining" = "Dining";
