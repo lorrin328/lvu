@@ -25,8 +25,8 @@ final class Expense {
     var location: String
     var date: Date
     var receiptDetected: Bool
-    @Relationship(inverse: \Trip.expenses) var trip: Trip?
-    @Relationship(inverse: \ItineraryDay.expenses) var itineraryDay: ItineraryDay?
+    var trip: Trip?
+    var itineraryDay: ItineraryDay?
 
     init(
         id: UUID = UUID(),
