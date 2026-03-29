@@ -36,3 +36,7 @@ targets:
       - path: Tests
     dependencies:
       - target: LVU
+    settings:
+      base:
+        PRODUCT_NAME: LVUTests
+        PRODUCT_MODULE_NAME: LVUTests
