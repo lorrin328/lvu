@@ -13,7 +13,8 @@ final class ModelAndParserTests: XCTestCase {
         let draft = parser.parse(rawText: rawText, occurredAt: Date(timeIntervalSince1970: 0))
 
         XCTAssertEqual(draft.merchantName, "Little Panda Cafe")
-        XCTAssertEqual(draft.amount, 168.50, accuracy: 0.001)
+        XCTAssertNotNil(draft.amount)
+        XCTAssertEqual(draft.amount ?? 0, 168.50, accuracy: 0.001)
         XCTAssertGreaterThan(draft.confidence, 0.5)
     }
 
@@ -29,6 +30,7 @@ final class ModelAndParserTests: XCTestCase {
         route.refreshStructuredFieldsFromLegacyText()
 
         XCTAssertEqual(route.durationMinutes, 130)
-        XCTAssertEqual(route.distanceKilometers, 140, accuracy: 0.001)
+        XCTAssertNotNil(route.distanceKilometers)
+        XCTAssertEqual(route.distanceKilometers ?? 0, 140, accuracy: 0.001)
     }
 }
