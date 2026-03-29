@@ -35,15 +35,15 @@ struct RouteCreateView: View {
 
             ToolbarItem(placement: .topBarTrailing) {
                 Button(L10n.Trips.save) {
-                    onSave(
-                        RoutePlan(
-                            fromName: fromName,
-                            toName: toName,
-                            durationText: durationText.isEmpty ? L10n.Trips.noData : durationText,
-                            distanceText: distanceText.isEmpty ? L10n.Trips.noData : distanceText,
-                            supportNote: supportNote.isEmpty ? L10n.Trips.noData : supportNote
-                        )
+                    let route = RoutePlan(
+                        fromName: fromName,
+                        toName: toName,
+                        durationText: durationText.isEmpty ? L10n.Trips.noData : durationText,
+                        distanceText: distanceText.isEmpty ? L10n.Trips.noData : distanceText,
+                        supportNote: supportNote.isEmpty ? L10n.Trips.noData : supportNote
                     )
+                    route.refreshStructuredFieldsFromLegacyText()
+                    onSave(route)
                     dismiss()
                 }
                 .disabled(fromName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || toName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)

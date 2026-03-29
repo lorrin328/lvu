@@ -33,6 +33,7 @@ final class Trip {
     @Relationship(deleteRule: .cascade) var itineraryDays: [ItineraryDay]
     @Relationship(deleteRule: .cascade) var places: [Place]
     @Relationship(deleteRule: .cascade) var routes: [RoutePlan]
+    @Relationship(deleteRule: .cascade, inverse: \Expense.trip) var expenses: [Expense]
 
     init(
         id: UUID = UUID(),
@@ -49,7 +50,8 @@ final class Trip {
         routeSummary: String,
         itineraryDays: [ItineraryDay] = [],
         places: [Place] = [],
-        routes: [RoutePlan] = []
+        routes: [RoutePlan] = [],
+        expenses: [Expense] = []
     ) {
         self.id = id
         self.title = title
@@ -66,5 +68,6 @@ final class Trip {
         self.itineraryDays = itineraryDays
         self.places = places
         self.routes = routes
+        self.expenses = expenses
     }
 }

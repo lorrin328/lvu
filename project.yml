@@ -27,4 +27,16 @@ targets:
         TARGETED_DEVICE_FAMILY: "1,2"
         SUPPORTS_MACCATALYST: NO
     scheme:
-      testTargets: []
+      testTargets:
+        - LVUTests
+  LVUTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: LVU
+    settings:
+      base:
+        PRODUCT_NAME: LVUTests
+        PRODUCT_MODULE_NAME: LVUTests

@@ -58,6 +58,11 @@
 "trips.route_distance_field" = "Distance";
 "trips.route_duration_field" = "Duration";
 "trips.route_support_field" = "Support notes";
+"trips.edit_route" = "Edit Route";
+"trips.delete_route" = "Delete Route";
+"trips.delete_route_title" = "Delete this route?";
+"trips.delete_route_message" = "This action cannot be undone.";
+"trips.delete" = "Delete";
 
 "expenses.title" = "Expense Records";
 "expenses.capture" = "Add Receipt";
@@ -71,6 +76,25 @@
 "expenses.date" = "Date";
 "expenses.receipt_detected" = "Detected from receipt";
 "expenses.receipt_hint" = "Version 1 keeps receipt OCR with manual confirmation.";
+"expenses.linking" = "Linking";
+"expenses.trip" = "Trip";
+"expenses.itinerary_day" = "Itinerary Day";
+"expenses.select_trip_placeholder" = "Select a trip";
+"expenses.no_day" = "No specific day";
+"expenses.total_amount" = "Total";
+"expenses.unassigned_day" = "Not linked to a day";
+"expenses.filters" = "Filters";
+"expenses.all_trips" = "All trips";
+"expenses.all_days" = "All days";
+"expenses.add_manual" = "Add Manual";
+"expenses.add_from_ocr" = "OCR Placeholder";
+"expenses.ocr_placeholder_title" = "Receipt OCR Placeholder";
+"expenses.ocr_placeholder_hint" = "Upload is placeholder-only in V1. Paste receipt text and parse a draft for manual confirmation.";
+"expenses.raw_text" = "Receipt Text";
+"expenses.parse_draft" = "Parse Draft";
+"expenses.parse_result" = "Parsed Draft";
+"expenses.confidence" = "Confidence";
+"expenses.selected_image" = "Selected image";
 
 "expense.category.dining" = "Dining";
 "expense.category.tickets" = "Tickets";

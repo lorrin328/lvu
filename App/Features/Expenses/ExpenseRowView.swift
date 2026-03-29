@@ -23,6 +23,18 @@ struct ExpenseRowView: View {
                 Text(LVUFormatters.expenseDate.string(from: expense.date))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
+
+                if let trip = expense.trip {
+                    if let day = expense.itineraryDay {
+                        Text("\(trip.title) · \(L10n.Trips.dayTitle) \(day.dayNumber)")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    } else {
+                        Text(trip.title)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
+                }
             }
 
             Spacer()

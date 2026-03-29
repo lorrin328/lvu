@@ -58,6 +58,11 @@
 "trips.route_distance_field" = "距离";
 "trips.route_duration_field" = "时长";
 "trips.route_support_field" = "途中说明";
+"trips.edit_route" = "编辑路线";
+"trips.delete_route" = "删除路线";
+"trips.delete_route_title" = "确认删除这条路线？";
+"trips.delete_route_message" = "删除后不可恢复。";
+"trips.delete" = "删除";
 
 "expenses.title" = "消费记录";
 "expenses.capture" = "添加凭证";
@@ -71,6 +76,25 @@
 "expenses.date" = "时间";
 "expenses.receipt_detected" = "是否来自截图识别";
 "expenses.receipt_hint" = "第一版保留截图 OCR 识别后的人工确认步骤。";
+"expenses.linking" = "关联信息";
+"expenses.trip" = "所属旅行";
+"expenses.itinerary_day" = "关联行程日";
+"expenses.select_trip_placeholder" = "请选择旅行";
+"expenses.no_day" = "不关联具体行程日";
+"expenses.total_amount" = "总消费";
+"expenses.unassigned_day" = "未关联行程日";
+"expenses.filters" = "筛选";
+"expenses.all_trips" = "全部旅行";
+"expenses.all_days" = "全部行程日";
+"expenses.add_manual" = "手动新增";
+"expenses.add_from_ocr" = "OCR 占位";
+"expenses.ocr_placeholder_title" = "截图 OCR 占位";
+"expenses.ocr_placeholder_hint" = "V1 仅提供占位流程。可先上传截图占位并粘贴凭证文本，解析草稿后人工确认保存。";
+"expenses.raw_text" = "凭证文本";
+"expenses.parse_draft" = "解析草稿";
+"expenses.parse_result" = "解析结果草稿";
+"expenses.confidence" = "置信度";
+"expenses.selected_image" = "已选图片";
 
 "expense.category.dining" = "餐饮";
 "expense.category.tickets" = "门票";

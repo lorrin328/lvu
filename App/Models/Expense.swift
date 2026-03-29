@@ -25,6 +25,8 @@ final class Expense {
     var location: String
     var date: Date
     var receiptDetected: Bool
+    var trip: Trip?
+    var itineraryDay: ItineraryDay?
 
     init(
         id: UUID = UUID(),
@@ -33,7 +35,9 @@ final class Expense {
         category: ExpenseCategory,
         location: String,
         date: Date,
-        receiptDetected: Bool
+        receiptDetected: Bool,
+        trip: Trip? = nil,
+        itineraryDay: ItineraryDay? = nil
     ) {
         self.id = id
         self.merchantName = merchantName
@@ -42,5 +46,7 @@ final class Expense {
         self.location = location
         self.date = date
         self.receiptDetected = receiptDetected
+        self.trip = trip
+        self.itineraryDay = itineraryDay
     }
 }
