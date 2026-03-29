@@ -5,6 +5,7 @@
 1. The first version should be positioned as a travel planning and execution app for family and parent-child trips.
 2. The MVP focuses on five capabilities: trip creation, daily itinerary planning, place management, route planning, and expense tracking.
 3. The differentiating feature is receipt screenshot parsing with auto-detected location suggestions plus manual confirmation.
+4. Version 1 of the iOS app must support both Simplified Chinese and English.
 
 ## Problem Diagnosis
 
@@ -442,6 +443,7 @@ The user creates a trip, arranges plans day by day, stores place and route infor
 - OCR: iOS Vision framework first
 - Map handoff: Apple Maps URL scheme first
 - Media input: PhotosPicker / Camera
+- Localization: `Localizable.strings` or String Catalog with Simplified Chinese and English in V1
 
 ### Risks
 
@@ -452,3 +454,17 @@ The user creates a trip, arranges plans day by day, stores place and route infor
 ### Suggested Choice
 
 Version 1 should be a trip organization tool rather than a travel content platform. Finish one complete trip workflow before adding recommendation intelligence.
+
+## Localization Requirement
+
+### Documentation
+
+- Maintain product documentation in both Simplified Chinese and English
+- Keep Chinese and English documents aligned by structure and revision timing
+
+### iOS App
+
+- Support `zh-Hans` and `en` in Version 1
+- Core screens, buttons, forms, empty states, alerts, and expense categories must be localized
+- The app should follow the system language by default
+- Text keys should be managed centrally to avoid hard-coded strings in SwiftUI views

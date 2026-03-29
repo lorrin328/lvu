@@ -5,42 +5,43 @@
 1. The product structure should be centered on `Trip`, not on generic attractions or maps.
 2. The primary user flow is: create trip -> plan by day -> store place and route details -> record expenses -> review totals.
 3. The first build should prioritize closed-loop usability over automation depth.
+4. The app information architecture must be localization-ready for Simplified Chinese and English from V1.
 
 ## Information Architecture
 
 ```text
 LVU
-├─ Trip List
-│  ├─ Create Trip
-│  └─ Open Existing Trip
-├─ Trip Overview
-│  ├─ Basic Info
-│  ├─ Daily Plans
-│  ├─ Places
-│  ├─ Routes
-│  └─ Expenses
-├─ Daily Plan
-│  ├─ Timeline Items
-│  ├─ Add Place
-│  ├─ Reorder Stops
-│  └─ Day Notes
-├─ Place Detail
-│  ├─ Attraction Info
-│  ├─ Dining Info
-│  ├─ Parking / Parent-Child Notes
-│  └─ Map Handoff
-├─ Route Planning
-│  ├─ From / To
-│  ├─ Distance / Duration
-│  ├─ Drive Mode
-│  └─ Fuel / Rest Notes
-├─ Expense Center
-│  ├─ Expense List
-│  ├─ Manual Entry
-│  ├─ Screenshot Parsing
-│  └─ Summary
-└─ Settings
-   └─ Default Preferences
+- Trip List
+  - Create Trip
+  - Open Existing Trip
+- Trip Overview
+  - Basic Info
+  - Daily Plans
+  - Places
+  - Routes
+  - Expenses
+- Daily Plan
+  - Timeline Items
+  - Add Place
+  - Reorder Stops
+  - Day Notes
+- Place Detail
+  - Attraction Info
+  - Dining Info
+  - Parking / Parent-Child Notes
+  - Map Handoff
+- Route Planning
+  - From / To
+  - Distance / Duration
+  - Drive Mode
+  - Fuel / Rest Notes
+- Expense Center
+  - Expense List
+  - Manual Entry
+  - Screenshot Parsing
+  - Summary
+- Settings
+  - Default Preferences
 ```
 
 ## Main User Flow
@@ -164,3 +165,9 @@ LVU
 - Cost summary
 - UX polish
 - Demo-ready review pass
+
+## Localization Notes
+
+- Screen titles, CTA buttons, field labels, and validation messages must use shared localization keys
+- Expense categories and place types should be defined as enum-backed keys, not hard-coded display text
+- Information architecture labels must keep one-to-one mapping between Chinese and English to reduce product drift
