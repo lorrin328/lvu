@@ -54,6 +54,16 @@ An iOS app project for travel planning and itinerary management.
 
 - [iOS App Skeleton Notes](docs/ios/bootstrap.md)
 
+## Stage Testing / 阶段测试
+
+### 中文
+
+- [阶段性测试清单](docs/testing/stage-checklist.zh-CN.md)
+
+### English
+
+- [Stage Test Checklist](docs/testing/stage-checklist.md)
+
 ## Project Bootstrap
 
 This repository uses `XcodeGen` to generate the Xcode project.
