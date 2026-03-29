@@ -33,3 +33,21 @@ An iOS app project for travel planning and itinerary management.
 
 - [MVP PRD](docs/product/prd-mvp.md)
 - [Information Architecture and MVP Priority](docs/product/information-architecture.md)
+
+## iOS Skeleton / iOS 骨架
+
+### 中文
+
+- [iOS 项目骨架说明](docs/ios/bootstrap.zh-CN.md)
+
+### English
+
+- [iOS App Skeleton Notes](docs/ios/bootstrap.md)
+
+## Project Bootstrap
+
+This repository uses `XcodeGen` to generate the Xcode project.
+
+```bash
+xcodegen generate
+```

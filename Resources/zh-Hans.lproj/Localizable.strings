@@ -1,0 +1,74 @@
+"tab.trips" = "行程";
+"tab.expenses" = "消费";
+"tab.settings" = "设置";
+
+"common.app_name" = "旅悟";
+"common.budget" = "预算";
+"common.notes" = "备注";
+"common.with_kids" = "带娃";
+"common.self_drive" = "自驾";
+"common.transit" = "公共交通";
+"common.yes" = "是";
+"common.no" = "否";
+"common.upcoming" = "即将出行";
+"common.today" = "最近记录";
+"common.sample" = "示例";
+
+"trips.title" = "旅行计划";
+"trips.create" = "新建旅行";
+"trips.empty_title" = "还没有旅行计划";
+"trips.empty_subtitle" = "先创建你的第一趟家庭旅行。";
+"trips.overview" = "总览";
+"trips.itinerary" = "行程安排";
+"trips.places" = "地点";
+"trips.routes" = "路线";
+"trips.expenses" = "消费";
+"trips.kid_friendly" = "亲子友好";
+"trips.route_planning" = "路线规划";
+
+"expenses.title" = "消费记录";
+"expenses.capture" = "添加凭证";
+"expenses.empty_title" = "还没有消费记录";
+"expenses.empty_subtitle" = "上传截图或手动新增一笔消费。";
+"expenses.merchant" = "商户";
+"expenses.amount" = "金额";
+"expenses.category" = "类别";
+"expenses.location" = "地点";
+"expenses.receipt_hint" = "第一版保留截图 OCR 识别后的人工确认步骤。";
+
+"expense.category.dining" = "餐饮";
+"expense.category.tickets" = "门票";
+"expense.category.transport" = "交通";
+"expense.category.hotel" = "住宿";
+"expense.category.shopping" = "购物";
+"expense.category.other" = "其他";
+
+"settings.title" = "设置";
+"settings.language" = "语言";
+"settings.language_hint" = "App 默认跟随系统语言，首版同时支持中文和英文。";
+"settings.localization_ready" = "已按双语结构搭建";
+"settings.roadmap" = "多语言基线";
+"settings.string_resource" = "String Catalog / Localizable.strings";
+"settings.language_pair" = "zh-Hans + en";
+"settings.system_language" = "优先跟随系统语言";
+
+"sample.trip_one_title" = "上海亲子周末游";
+"sample.trip_one_destination" = "上海";
+"sample.trip_one_highlight_one" = "迪士尼";
+"sample.trip_one_highlight_two" = "海洋馆";
+"sample.trip_one_highlight_three" = "亲子晚餐";
+"sample.trip_one_route" = "核心景点之间以地铁和打车为主";
+"sample.trip_two_title" = "珠海自驾轻度假";
+"sample.trip_two_destination" = "珠海";
+"sample.trip_two_highlight_one" = "海滨公园";
+"sample.trip_two_highlight_two" = "长隆海洋王国";
+"sample.trip_two_highlight_three" = "中途休息点规划";
+"sample.trip_two_route" = "自驾路线，预留两个加油候选点";
+"sample.expense_one_merchant" = "熊猫小馆";
+"sample.expense_one_location" = "上海迪士尼";
+"sample.expense_two_merchant" = "壳牌加油站";
+"sample.expense_two_location" = "珠海高速服务区";
+"sample.place_disney" = "迪士尼乐园";
+"sample.place_restaurant" = "家庭餐厅";
+"sample.place_parking" = "A 区停车场";
+"sample.receipt_detected" = "已识别 2 条凭证记录";

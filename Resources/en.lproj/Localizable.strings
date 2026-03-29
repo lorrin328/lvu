@@ -1,0 +1,74 @@
+"tab.trips" = "Trips";
+"tab.expenses" = "Expenses";
+"tab.settings" = "Settings";
+
+"common.app_name" = "LVU";
+"common.budget" = "Budget";
+"common.notes" = "Notes";
+"common.with_kids" = "With kids";
+"common.self_drive" = "Self-drive";
+"common.transit" = "Transit";
+"common.yes" = "Yes";
+"common.no" = "No";
+"common.upcoming" = "Upcoming trips";
+"common.today" = "Recent records";
+"common.sample" = "Sample";
+
+"trips.title" = "Trip Plans";
+"trips.create" = "New Trip";
+"trips.empty_title" = "No trips yet";
+"trips.empty_subtitle" = "Create your first family travel plan.";
+"trips.overview" = "Overview";
+"trips.itinerary" = "Itinerary";
+"trips.places" = "Places";
+"trips.routes" = "Routes";
+"trips.expenses" = "Expenses";
+"trips.kid_friendly" = "Kid-friendly";
+"trips.route_planning" = "Route plan";
+
+"expenses.title" = "Expense Records";
+"expenses.capture" = "Add Receipt";
+"expenses.empty_title" = "No expenses yet";
+"expenses.empty_subtitle" = "Capture a receipt or add a manual expense.";
+"expenses.merchant" = "Merchant";
+"expenses.amount" = "Amount";
+"expenses.category" = "Category";
+"expenses.location" = "Location";
+"expenses.receipt_hint" = "Version 1 keeps receipt OCR with manual confirmation.";
+
+"expense.category.dining" = "Dining";
+"expense.category.tickets" = "Tickets";
+"expense.category.transport" = "Transport";
+"expense.category.hotel" = "Hotel";
+"expense.category.shopping" = "Shopping";
+"expense.category.other" = "Other";
+
+"settings.title" = "Settings";
+"settings.language" = "Language";
+"settings.language_hint" = "The app follows the system language by default. Chinese and English ship in V1.";
+"settings.localization_ready" = "Localization-ready app shell";
+"settings.roadmap" = "Localization baseline";
+"settings.string_resource" = "String Catalog / Localizable.strings";
+"settings.language_pair" = "zh-Hans + en";
+"settings.system_language" = "System language first";
+
+"sample.trip_one_title" = "Shanghai Family Weekend";
+"sample.trip_one_destination" = "Shanghai";
+"sample.trip_one_highlight_one" = "Disney";
+"sample.trip_one_highlight_two" = "Aquarium";
+"sample.trip_one_highlight_three" = "Kid-friendly dinner";
+"sample.trip_one_route" = "Metro and taxi between family attractions";
+"sample.trip_two_title" = "Zhuhai Self-Drive Escape";
+"sample.trip_two_destination" = "Zhuhai";
+"sample.trip_two_highlight_one" = "Seaside park";
+"sample.trip_two_highlight_two" = "Ocean Kingdom";
+"sample.trip_two_highlight_three" = "Rest stop plan";
+"sample.trip_two_route" = "Self-drive with two fuel stop candidates";
+"sample.expense_one_merchant" = "Little Panda Cafe";
+"sample.expense_one_location" = "Shanghai Disneyland";
+"sample.expense_two_merchant" = "Shell Station";
+"sample.expense_two_location" = "Zhuhai Highway Service Area";
+"sample.place_disney" = "Disneyland";
+"sample.place_restaurant" = "Family Restaurant";
+"sample.place_parking" = "Parking Lot A";
+"sample.receipt_detected" = "2 receipt records detected";
