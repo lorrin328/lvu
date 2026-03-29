@@ -18,3 +18,8 @@ An iOS app project for travel planning and itinerary management.
 ## Next Step
 
 Create the GitHub repository and bind this local project to the remote.
+
+## Product Docs
+
+- [MVP PRD](docs/product/prd-mvp.md)
+- [Information Architecture and MVP Priority](docs/product/information-architecture.md)
