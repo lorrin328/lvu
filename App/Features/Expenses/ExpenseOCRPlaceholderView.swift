@@ -1,49 +1,80 @@
 import SwiftUI
 import SwiftData
+import PhotosUI
 
-struct ExpenseCreateView: View {
+struct ExpenseOCRPlaceholderView: View {
     @Environment(\.dismiss) private var dismiss
     @Query(sort: \Trip.startDate, order: .reverse) private var trips: [Trip]
 
+    @State private var selectedPhotoItem: PhotosPickerItem?
+    @State private var rawText = ""
     @State private var merchantName = ""
     @State private var amount = ""
-    @State private var category: ExpenseCategory = .dining
     @State private var location = ""
     @State private var date = Date()
-    @State private var receiptDetected = false
+    @State private var confidence = 0.0
+    @State private var category: ExpenseCategory = .other
     @State private var selectedTripID: UUID?
     @State private var selectedDayID: UUID?
 
+    let parser: ReceiptParser
     let onSave: (Expense) -> Void
-    
+
+    init(parser: ReceiptParser = PlaceholderReceiptParser(), onSave: @escaping (Expense) -> Void) {
+        self.parser = parser
+        self.onSave = onSave
+    }
+
     private var selectedTrip: Trip? {
         guard let selectedTripID else { return nil }
         return trips.first(where: { $0.id == selectedTripID })
     }
-    
+
     private var availableDays: [ItineraryDay] {
         guard let selectedTrip else { return [] }
         return selectedTrip.itineraryDays.sorted { $0.dayNumber < $1.dayNumber }
     }
-    
+
     private var saveDisabled: Bool {
-        merchantName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || selectedTripID == nil
+        selectedTripID == nil || merchantName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
     var body: some View {
         Form {
-            Section(L10n.Expenses.title) {
+            Section(L10n.Expenses.ocrPlaceholderTitle) {
+                Text(L10n.Expenses.ocrPlaceholderHint)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                PhotosPicker(selection: $selectedPhotoItem, matching: .images) {
+                    Label(L10n.Expenses.capture, systemImage: "photo")
+                }
+                if selectedPhotoItem != nil {
+                    Label(L10n.Expenses.selectedImage, systemImage: "checkmark.circle.fill")
+                        .foregroundStyle(.green)
+                }
+            }
+
+            Section(L10n.Expenses.rawText) {
+                TextEditor(text: $rawText)
+                    .frame(minHeight: 120)
+                Button(L10n.Expenses.parseDraft) {
+                    applyParsedDraft()
+                }
+                .disabled(rawText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            }
+
+            Section(L10n.Expenses.parseResult) {
                 TextField(L10n.Expenses.merchant, text: $merchantName)
                 TextField(L10n.Expenses.amount, text: $amount)
                     .keyboardType(.decimalPad)
+                TextField(L10n.Expenses.location, text: $location)
                 Picker(L10n.Expenses.category, selection: $category) {
                     ForEach(ExpenseCategory.allCases) { item in
                         Text(item.localizedName).tag(item)
                     }
                 }
-                TextField(L10n.Expenses.location, text: $location)
                 DatePicker(L10n.Expenses.date, selection: $date)
-                Toggle(L10n.Expenses.receiptDetected, isOn: $receiptDetected)
+                LabeledContent(L10n.Expenses.confidence, value: "\(Int(confidence * 100))%")
             }
 
             Section(L10n.Expenses.linking) {
@@ -53,7 +84,7 @@ struct ExpenseCreateView: View {
                         Text(trip.title).tag(Optional(trip.id))
                     }
                 }
-                
+
                 Picker(L10n.Expenses.itineraryDay, selection: $selectedDayID) {
                     Text(L10n.Expenses.noDay).tag(Optional<UUID>.none)
                     ForEach(availableDays) { day in
@@ -69,27 +100,19 @@ struct ExpenseCreateView: View {
                 selectedTripID = firstTrip.id
             }
         }
-        .onChange(of: selectedTripID) { _, newTripID in
-            guard let newTripID else {
-                selectedDayID = nil
-                return
-            }
+        .onChange(of: selectedTripID) { _, _ in
             let dayStillValid = availableDays.contains(where: { $0.id == selectedDayID })
             if !dayStillValid {
                 selectedDayID = nil
             }
-            if trips.contains(where: { $0.id == newTripID }) == false {
-                selectedDayID = nil
-            }
         }
-        .navigationTitle(L10n.Expenses.createTitle)
+        .navigationTitle(L10n.Expenses.ocrPlaceholderTitle)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button(L10n.Common.cancel) {
                     dismiss()
                 }
             }
-
             ToolbarItem(placement: .topBarTrailing) {
                 Button(L10n.Trips.save) {
                     onSave(
@@ -99,7 +122,7 @@ struct ExpenseCreateView: View {
                             category: category,
                             location: location.isEmpty ? L10n.Trips.noData : location,
                             date: date,
-                            receiptDetected: receiptDetected,
+                            receiptDetected: true,
                             trip: selectedTrip,
                             itineraryDay: availableDays.first(where: { $0.id == selectedDayID })
                         )
@@ -110,10 +133,22 @@ struct ExpenseCreateView: View {
             }
         }
     }
+
+    private func applyParsedDraft() {
+        let parsed = parser.parse(rawText: rawText, occurredAt: date)
+        merchantName = parsed.merchantName ?? merchantName
+        if let parsedAmount = parsed.amount {
+            amount = String(format: "%.2f", parsedAmount)
+        }
+        location = parsed.address ?? location
+        date = parsed.occurredAt
+        confidence = parsed.confidence
+    }
 }
 
 #Preview {
     NavigationStack {
-        ExpenseCreateView { _ in }
+        ExpenseOCRPlaceholderView { _ in }
     }
+    .modelContainer(for: [Trip.self, ItineraryDay.self, Place.self, RoutePlan.self, Expense.self], inMemory: true)
 }

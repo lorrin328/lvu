@@ -7,17 +7,21 @@ enum SampleDataSeeder {
         let tripDescriptor = FetchDescriptor<Trip>()
         let tripCount = try context.fetchCount(tripDescriptor)
 
+        var seededTrips: [Trip] = []
         if tripCount == 0 {
-            for trip in sampleTrips() {
+            seededTrips = sampleTrips()
+            for trip in seededTrips {
                 context.insert(trip)
             }
+        } else {
+            seededTrips = try context.fetch(tripDescriptor)
         }
 
         let expenseDescriptor = FetchDescriptor<Expense>()
         let expenseCount = try context.fetchCount(expenseDescriptor)
 
         if expenseCount == 0 {
-            for expense in sampleExpenses() {
+            for expense in sampleExpenses(trips: seededTrips) {
                 context.insert(expense)
             }
         }
@@ -140,7 +144,12 @@ enum SampleDataSeeder {
         ]
     }
 
-    static func sampleExpenses() -> [Expense] {
+    static func sampleExpenses(trips: [Trip]) -> [Expense] {
+        let firstTrip = trips.first
+        let secondTrip = trips.dropFirst().first
+        let firstTripDay = firstTrip?.itineraryDays.sorted { $0.dayNumber < $1.dayNumber }.first
+        let secondTripDay = secondTrip?.itineraryDays.sorted { $0.dayNumber < $1.dayNumber }.first
+
         [
             Expense(
                 merchantName: L10n.Sample.expenseOneMerchant,
@@ -148,7 +157,9 @@ enum SampleDataSeeder {
                 category: .dining,
                 location: L10n.Sample.expenseOneLocation,
                 date: .now,
-                receiptDetected: true
+                receiptDetected: true,
+                trip: firstTrip,
+                itineraryDay: firstTripDay
             ),
             Expense(
                 merchantName: L10n.Sample.expenseTwoMerchant,
@@ -156,7 +167,9 @@ enum SampleDataSeeder {
                 category: .transport,
                 location: L10n.Sample.expenseTwoLocation,
                 date: Calendar.current.date(byAdding: .day, value: -1, to: .now) ?? .now,
-                receiptDetected: false
+                receiptDetected: false,
+                trip: secondTrip,
+                itineraryDay: secondTripDay
             )
         ]
     }

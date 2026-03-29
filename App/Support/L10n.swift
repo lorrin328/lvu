@@ -66,6 +66,11 @@ enum L10n {
         static let routeDistanceField = String(localized: "trips.route_distance_field")
         static let routeDurationField = String(localized: "trips.route_duration_field")
         static let routeSupportField = String(localized: "trips.route_support_field")
+        static let editRoute = String(localized: "trips.edit_route")
+        static let deleteRoute = String(localized: "trips.delete_route")
+        static let deleteRouteTitle = String(localized: "trips.delete_route_title")
+        static let deleteRouteMessage = String(localized: "trips.delete_route_message")
+        static let delete = String(localized: "trips.delete")
     }
 
     enum Expenses {
@@ -81,6 +86,25 @@ enum L10n {
         static let date = String(localized: "expenses.date")
         static let receiptDetected = String(localized: "expenses.receipt_detected")
         static let receiptHint = String(localized: "expenses.receipt_hint")
+        static let linking = String(localized: "expenses.linking")
+        static let trip = String(localized: "expenses.trip")
+        static let itineraryDay = String(localized: "expenses.itinerary_day")
+        static let selectTripPlaceholder = String(localized: "expenses.select_trip_placeholder")
+        static let noDay = String(localized: "expenses.no_day")
+        static let totalAmount = String(localized: "expenses.total_amount")
+        static let unassignedDay = String(localized: "expenses.unassigned_day")
+        static let filters = String(localized: "expenses.filters")
+        static let allTrips = String(localized: "expenses.all_trips")
+        static let allDays = String(localized: "expenses.all_days")
+        static let addManual = String(localized: "expenses.add_manual")
+        static let addFromOCR = String(localized: "expenses.add_from_ocr")
+        static let ocrPlaceholderTitle = String(localized: "expenses.ocr_placeholder_title")
+        static let ocrPlaceholderHint = String(localized: "expenses.ocr_placeholder_hint")
+        static let rawText = String(localized: "expenses.raw_text")
+        static let parseDraft = String(localized: "expenses.parse_draft")
+        static let parseResult = String(localized: "expenses.parse_result")
+        static let confidence = String(localized: "expenses.confidence")
+        static let selectedImage = String(localized: "expenses.selected_image")
     }
 
     enum Settings {
