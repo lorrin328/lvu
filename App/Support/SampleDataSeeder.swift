@@ -150,7 +150,7 @@ enum SampleDataSeeder {
         let firstTripDay = firstTrip?.itineraryDays.sorted { $0.dayNumber < $1.dayNumber }.first
         let secondTripDay = secondTrip?.itineraryDays.sorted { $0.dayNumber < $1.dayNumber }.first
 
-        [
+        return [
             Expense(
                 merchantName: L10n.Sample.expenseOneMerchant,
                 amount: 168,
