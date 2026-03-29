@@ -2,12 +2,6 @@ import SwiftUI
 import SwiftData
 
 struct TripDetailView: View {
-    struct ExpenseDaySummary: Identifiable {
-        let id: String
-        let title: String
-        let amount: Double
-    }
-
     @Environment(\.modelContext) private var modelContext
     @Bindable var trip: Trip
     @State private var showingDaySheet = false
@@ -21,38 +15,21 @@ struct TripDetailView: View {
     }
     
     private var totalExpenseAmount: Double {
-        sortedTripExpenses.reduce(0) { $0 + $1.amount }
+        ExpenseDomain.summarizeByDay(
+            expenses: sortedTripExpenses,
+            itineraryDays: trip.itineraryDays,
+            dayTitlePrefix: L10n.Trips.dayTitle,
+            unassignedTitle: L10n.Expenses.unassignedDay
+        ).total
     }
     
     private var expenseByDay: [ExpenseDaySummary] {
-        var result = trip.itineraryDays
-            .sorted { $0.dayNumber < $1.dayNumber }
-            .compactMap { day -> ExpenseDaySummary? in
-                let amount = sortedTripExpenses
-                    .filter { $0.itineraryDay?.id == day.id }
-                    .reduce(0) { $0 + $1.amount }
-                guard amount > 0 else { return nil }
-                return ExpenseDaySummary(
-                    id: day.id.uuidString,
-                    title: "\(L10n.Trips.dayTitle) \(day.dayNumber)",
-                    amount: amount
-                )
-            }
-        
-        let unassignedAmount = sortedTripExpenses
-            .filter { $0.itineraryDay == nil }
-            .reduce(0) { $0 + $1.amount }
-        if unassignedAmount > 0 {
-            result.append(
-                ExpenseDaySummary(
-                    id: "unassigned-day-expense",
-                    title: L10n.Expenses.unassignedDay,
-                    amount: unassignedAmount
-                )
-            )
-        }
-        
-        return result
+        ExpenseDomain.summarizeByDay(
+            expenses: sortedTripExpenses,
+            itineraryDays: trip.itineraryDays,
+            dayTitlePrefix: L10n.Trips.dayTitle,
+            unassignedTitle: L10n.Expenses.unassignedDay
+        ).daySummaries
     }
 
     var body: some View {

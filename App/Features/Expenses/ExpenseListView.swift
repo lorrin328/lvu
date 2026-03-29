@@ -20,17 +20,11 @@ struct ExpenseListView: View {
     }
     
     private var filteredExpenses: [Expense] {
-        let tripFiltered: [Expense]
-        if let selectedTripID {
-            tripFiltered = expenses.filter { $0.trip?.id == selectedTripID }
-        } else {
-            tripFiltered = expenses
-        }
-        
-        if let selectedDayID {
-            return tripFiltered.filter { $0.itineraryDay?.id == selectedDayID }
-        }
-        return tripFiltered
+        ExpenseDomain.filter(
+            expenses: expenses,
+            tripID: selectedTripID,
+            dayID: selectedDayID
+        )
     }
 
     var body: some View {
