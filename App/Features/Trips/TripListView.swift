@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct TripListView: View {
-    private let trips = Trip.samples
+    @State private var trips = Trip.samples
+    @State private var showingCreateSheet = false
 
     var body: some View {
         List {
@@ -29,6 +30,14 @@ struct TripListView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(L10n.Trips.create) {
+                    showingCreateSheet = true
+                }
+            }
+        }
+        .sheet(isPresented: $showingCreateSheet) {
+            NavigationStack {
+                TripCreateView { trip in
+                    trips.insert(trip, at: 0)
                 }
             }
         }

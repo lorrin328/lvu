@@ -6,25 +6,54 @@ struct TripDetailView: View {
     var body: some View {
         List {
             Section(L10n.Trips.overview) {
+                LabeledContent(L10n.Trips.fromTo, value: "\(trip.origin) -> \(trip.destination)")
                 LabeledContent(L10n.Common.budget, value: localizedCurrency(trip.budget))
                 LabeledContent(L10n.Trips.routePlanning, value: trip.routeSummary)
                 LabeledContent(L10n.Common.withKids, value: trip.withKids ? L10n.Trips.kidFriendly : L10n.Common.no)
+                LabeledContent(L10n.Trips.kidAgeGroup, value: trip.kidAgeGroup.localizedName)
             }
 
             Section(L10n.Trips.itinerary) {
-                ForEach(trip.highlights, id: \.self) { item in
-                    Label(item, systemImage: "checkmark.circle")
+                ForEach(trip.itineraryDays) { day in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("\(L10n.Trips.dayTitle) \(day.dayNumber)")
+                            .font(.headline)
+                        Text(day.summary)
+                        Text(day.notes)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
 
             Section(L10n.Trips.places) {
-                Label(L10n.Sample.placeDisney, systemImage: "sparkles")
-                Label(L10n.Sample.placeRestaurant, systemImage: "fork.knife")
-                Label(L10n.Sample.placeParking, systemImage: "parkingsign.circle")
+                ForEach(trip.places) { place in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(place.name)
+                            .font(.headline)
+                        Text(place.kind.localizedName)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text(place.address)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
             }
 
             Section(L10n.Trips.routes) {
-                Label(trip.routeSummary, systemImage: "point.topleft.down.curvedto.point.bottomright.up")
+                ForEach(trip.routes) { route in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("\(route.fromName) -> \(route.toName)")
+                            .font(.headline)
+                        Text("\(route.distanceText) · \(route.durationText)")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text(route.supportNote)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
             }
 
             Section(L10n.Trips.expenses) {
