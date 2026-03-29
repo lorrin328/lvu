@@ -2,10 +2,58 @@ import SwiftUI
 import SwiftData
 
 struct TripDetailView: View {
+    struct ExpenseDaySummary: Identifiable {
+        let id: String
+        let title: String
+        let amount: Double
+    }
+
+    @Environment(\.modelContext) private var modelContext
     @Bindable var trip: Trip
     @State private var showingDaySheet = false
     @State private var showingPlaceSheet = false
     @State private var showingRouteSheet = false
+    @State private var editingRoute: RoutePlan?
+    @State private var routePendingDeletion: RoutePlan?
+    
+    private var sortedTripExpenses: [Expense] {
+        trip.expenses.sorted { $0.date > $1.date }
+    }
+    
+    private var totalExpenseAmount: Double {
+        sortedTripExpenses.reduce(0) { $0 + $1.amount }
+    }
+    
+    private var expenseByDay: [ExpenseDaySummary] {
+        var result = trip.itineraryDays
+            .sorted { $0.dayNumber < $1.dayNumber }
+            .compactMap { day -> ExpenseDaySummary? in
+                let amount = sortedTripExpenses
+                    .filter { $0.itineraryDay?.id == day.id }
+                    .reduce(0) { $0 + $1.amount }
+                guard amount > 0 else { return nil }
+                return ExpenseDaySummary(
+                    id: day.id.uuidString,
+                    title: "\(L10n.Trips.dayTitle) \(day.dayNumber)",
+                    amount: amount
+                )
+            }
+        
+        let unassignedAmount = sortedTripExpenses
+            .filter { $0.itineraryDay == nil }
+            .reduce(0) { $0 + $1.amount }
+        if unassignedAmount > 0 {
+            result.append(
+                ExpenseDaySummary(
+                    id: "unassigned-day-expense",
+                    title: L10n.Expenses.unassignedDay,
+                    amount: unassignedAmount
+                )
+            )
+        }
+        
+        return result
+    }
 
     var body: some View {
         List {
@@ -57,11 +105,47 @@ struct TripDetailView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
+                    .swipeActions {
+                        Button(L10n.Trips.editRoute) {
+                            editingRoute = route
+                        }
+                        
+                        Button(L10n.Trips.deleteRoute, role: .destructive) {
+                            routePendingDeletion = route
+                        }
+                    }
                 }
             }
 
             Section(L10n.Trips.expenses) {
-                Label(L10n.Sample.receiptDetected, systemImage: "text.viewfinder")
+                if trip.expenses.isEmpty {
+                    Text(L10n.Expenses.emptySubtitle)
+                        .foregroundStyle(.secondary)
+                } else {
+                    LabeledContent(L10n.Expenses.totalAmount, value: localizedCurrency(totalExpenseAmount))
+                    
+                    ForEach(expenseByDay) { item in
+                        LabeledContent(item.title, value: localizedCurrency(item.amount))
+                    }
+                    
+                    ForEach(sortedTripExpenses) { expense in
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack {
+                                Text(expense.merchantName)
+                                    .font(.headline)
+                                Spacer()
+                                Text(localizedCurrency(expense.amount))
+                                    .font(.subheadline.weight(.semibold))
+                            }
+                            Text("\(expense.category.localizedName) · \(expense.location)")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Text(LVUFormatters.expenseDate.string(from: expense.date))
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
             }
         }
         .navigationTitle(trip.title)
@@ -102,6 +186,34 @@ struct TripDetailView: View {
                     trip.routes.append(route)
                 }
             }
+        }
+        .sheet(item: $editingRoute) { route in
+            NavigationStack {
+                RouteEditView(route: route)
+            }
+        }
+        .alert(
+            L10n.Trips.deleteRouteTitle,
+            isPresented: Binding(
+                get: { routePendingDeletion != nil },
+                set: { newValue in
+                    if !newValue {
+                        routePendingDeletion = nil
+                    }
+                }
+            )
+        ) {
+            Button(L10n.Common.cancel, role: .cancel) {
+                routePendingDeletion = nil
+            }
+            Button(L10n.Trips.delete, role: .destructive) {
+                guard let routePendingDeletion else { return }
+                trip.routes.removeAll(where: { $0.id == routePendingDeletion.id })
+                modelContext.delete(routePendingDeletion)
+                self.routePendingDeletion = nil
+            }
+        } message: {
+            Text(L10n.Trips.deleteRouteMessage)
         }
     }
 }
