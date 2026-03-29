@@ -61,3 +61,19 @@ This repository uses `XcodeGen` to generate the Xcode project.
 ```bash
 xcodegen generate
 ```
+
+## Collaboration Flow
+
+### 中文
+
+1. 通过 Issue 模板创建需求或缺陷。
+2. 使用分支开发并提交 Pull Request。
+3. 在 PR 中填写变更摘要、验证方式和风险说明。
+4. 合并前由 CI 自动执行基础构建检查。
+
+### English
+
+1. Create work items using issue templates (feature/bug).
+2. Implement changes in a branch and open a pull request.
+3. Fill PR summary, validation notes, and risks.
+4. CI runs baseline build checks before merge.
